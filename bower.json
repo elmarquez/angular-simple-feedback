@@ -1,0 +1,28 @@
+{
+  "name": "angular-simple-feedback",
+  "description": "Easy to configure widget that allow users to provide feedback about a web page.",
+  "version": "0.1.0",
+  "main": "gruntfile.js",
+  "authors": [
+    "Davis Marques <dmarques@freshbits.io>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "directive",
+    "feedback",
+    "user"
+  ],
+  "homepage": "https://github.com/elmarquez/angular-simple-feedback",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.1"
+  }
+}
