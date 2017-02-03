@@ -46,7 +46,8 @@ module.exports = {
         res.end('OK');
       } else if (S(req.url).startsWith('/api/feedback/fail')) {
         // FAIL
-        res.status(400).end('ERROR');
+        res.statusCode = 400;
+        res.end('ERROR');
       } else if (S(req.url).startsWith('/api/feedback')) {
         res.end('OK');
       } else {

@@ -21,7 +21,7 @@
      feedback-widget
      method="post"
      <% if (recaptcha) { %>recaptcha="'<%- recaptcha %>'"<% } %>
-     url="'/api/feedback'">
+     url="'/api/feedback/success'">
 
     <!-- hide the send feedback button when the form is being displayed -->
     <!--<button class="toggle-state" ng-click="$parent.show()" ng-hide="$parent.state===$parent.STATES.FORM">Send Feedback</button>-->
@@ -52,13 +52,10 @@
             </div>
         </form>
     </div>
-
-    <div class="error panel"
-         ng-class="{slideIn:$parent.state===$parent.STATES.ERROR,slideOut:$parent.state!==$parent.STATES.ERROR}"
-         ng-show="$parent.state===$parent.STATES.ERROR">Oh no ... an error occurred while sending your feedback!</div>
-    <div class="success panel"
-         ng-class="{slideIn:$parent.state===$parent.STATES.SUCCESS,slideOut:$parent.state!==$parent.STATES.SUCCESS}"
-         ng-show="$parent.state===$parent.STATES.SUCCESS">Thanks for your feedback!</div>
+    <div class="message panel hidden"
+         ng-class="{error:$parent.state===$parent.STATES.ERROR,success:$parent.state===$parent.STATES.SUCCESS,slideIn:$parent.state===$parent.STATES.ERROR||$parent.state===$parent.STATES.SUCCESS,slideOut:$parent.state===$parent.STATES.BUTTON}">
+        {{$parent.message}}
+    </div>
 </div>
 
 <% if (recaptcha) { %>

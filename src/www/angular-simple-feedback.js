@@ -4,6 +4,7 @@
 function FeedbackController ($scope, $http, $location) {
     $scope.STATES = {READY:0,FORM:1,BUTTON:2,SENT:4,SUCCESS:5,ERROR:6};
     $scope.data = {};
+    $scope.message = '';
     $scope.recaptcha = null;
     $scope.state = $scope.STATES.READY;
 
@@ -34,20 +35,21 @@ function FeedbackController ($scope, $http, $location) {
                         console.info('failed');
                     }
                 }
+                $scope.message = 'Thanks for your feedback!';
                 $scope.state = $scope.STATES.SUCCESS;
                 setTimeout(function () {
                     $scope.data = {};
                     $scope.state = $scope.STATES.BUTTON;
                     $scope.$apply();
-                }, 3000);
+                }, 5000);
             })
             .catch(function (err) {
-                console.error(err);
+                $scope.message = 'Uh oh, we couldn\'t send your feedback!';
                 $scope.state = $scope.STATES.ERROR;
                 setTimeout(function () {
                     $scope.state = $scope.STATES.BUTTON;
                     $scope.$apply();
-                }, 3000);
+                }, 5000);
             });
     };
 }

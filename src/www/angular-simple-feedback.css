@@ -127,7 +127,14 @@
 }
 
 .simple-feedback .panel.hidden {
-    display: none;
+    transform: translateY(200%);
+}
+
+.simple-feedback .panel.message {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    padding: 12px 10px 12px 10px;
 }
 
 .simple-feedback .panel.success {
