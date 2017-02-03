@@ -22,28 +22,48 @@
      method="post"
      <% if (recaptcha) { %>recaptcha="'<%- recaptcha %>'"<% } %>
      url="'/api/feedback'">
-    <button class="toggle-opacity" ng-click="$parent.show()" ng-hide="state!==STATES.FORM">Send Feedback</button>
-    <div class="form toggle-opacity" ng-show="state===STATES.FORM" ng-cloak>
+
+    <!-- hide the send feedback button when the form is being displayed -->
+    <!--<button class="toggle-state" ng-click="$parent.show()" ng-hide="$parent.state===$parent.STATES.FORM">Send Feedback</button>-->
+
+    <!-- always display the send feedback button -->
+    <button class="show" ng-click="$parent.showForm()" ng-hide="$parent.state===$parent.STATES.FORM">Send Feedback</button>
+
+    <div class="panel"
+         ng-class="{slideIn:$parent.state===$parent.STATES.FORM,slideOut:$parent.state!==$parent.STATES.FORM}"
+         ng-cloak
+         ng-hide="$parent.state===$parent.STATES.READY">
         <div class="head">
             Send Feedback
-            <!--<button class="hide" ng-click="$parent.hide()">Hide</button>-->
+            <button class="close" ng-click="$parent.hideForm()">x</button>
         </div>
-        <div class="body">
-            <div class="row">
-                <input type="email" class="full-width" ng-model="data.email" placeholder="Email Address" required />
+        <form ng-submit="$parent.submit()">
+            <div class="body">
+                <div class="row">
+                    <input type="email" class="full-width" ng-model="$parent.data.email" placeholder="Email Address" required />
+                </div>
+                <div class="row">
+                    <textarea name="description" class="full-width" ng-model="$parent.data.description" rows="4" placeholder="Description"></textarea>
+                </div>
+                <div id="g-recaptcha" class="row"></div>
             </div>
-            <div class="row">
-                <textarea name="description" class="full-width" ng-model="data.description" rows="4" placeholder="Description"></textarea>
+            <div class="footer">
+                <button type="submit">Send</button>
             </div>
-            <div id="g-recaptcha" class="row"></div>
-        </div>
-        <div class="footer">
-            <button type="submit" ng-click="$parent.submit()">Send</button>
-        </div>
+        </form>
     </div>
+
+    <div class="error panel"
+         ng-class="{slideIn:$parent.state===$parent.STATES.ERROR,slideOut:$parent.state!==$parent.STATES.ERROR}"
+         ng-show="$parent.state===$parent.STATES.ERROR">Oh no ... an error occurred while sending your feedback!</div>
+    <div class="success panel"
+         ng-class="{slideIn:$parent.state===$parent.STATES.SUCCESS,slideOut:$parent.state!==$parent.STATES.SUCCESS}"
+         ng-show="$parent.state===$parent.STATES.SUCCESS">Thanks for your feedback!</div>
 </div>
 
+<% if (recaptcha) { %>
 <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaCallback&render=explicit"></script>
+<% } %>
 
 </body>
-</html>
+

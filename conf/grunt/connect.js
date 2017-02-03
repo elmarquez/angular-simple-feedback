@@ -19,11 +19,5 @@ module.exports = {
         return middlewares;
       }
     }
-  },
-  test: {
-    options: {
-      base: 'dist',
-      port: 8081
-    }
   }
 };

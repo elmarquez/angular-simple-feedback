@@ -39,12 +39,16 @@ module.exports = {
      * @param next Next
      */
     function (req, res, next) {
-      if (S(req.url).startsWith('/feedback/success')) {
+      // console.dir(res);
+      console.info(req.method, req.url, req.method === 'POST' ? req.body : '');
+      if (S(req.url).startsWith('/api/feedback/success')) {
         // SUCCEED
-        res.json('{msg:"OK"}');
-      } else if (S(req.url).startsWith('/feedback/fail')) {
+        res.end('OK');
+      } else if (S(req.url).startsWith('/api/feedback/fail')) {
         // FAIL
-        res.status(400).json('{msg:"ERROR"}');
+        res.status(400).end('ERROR');
+      } else if (S(req.url).startsWith('/api/feedback')) {
+        res.end('OK');
       } else {
         next();
       }
@@ -58,7 +62,7 @@ module.exports = {
      * @param {Object} res Response
      * @param {Object} next Next
      */
-      function (req, res, next) {
+    function (req, res, next) {
       if (req.method === 'POST' || req.method === 'PUT') {
         req.setEncoding('utf8');
         req.on('data', function (data) {

@@ -1,61 +1,69 @@
 /* jshint unused:false */
 'use strict';
 
-function FeedbackController ($scope, $http, $element) {
-    $scope.STATES = {READY:0,FORM:1,BUTTON:2};
-    $scope.captcha = null;
+function FeedbackController ($scope, $http, $location) {
+    $scope.STATES = {READY:0,FORM:1,BUTTON:2,SENT:4,SUCCESS:5,ERROR:6};
     $scope.data = {};
+    $scope.recaptcha = null;
     $scope.state = $scope.STATES.READY;
 
-    $scope.hide = function () {
+    $scope.hideForm = function () {
         $scope.state = $scope.STATES.BUTTON;
-        console.info('state', $scope.state);
     };
     $scope.setupRecaptcha = function () {
         window.onRecaptchaCallback = function () {
-            $scope.captcha = grecaptcha.render('g-recaptcha', {sitekey: $scope.ctrl.recaptcha});
+            $scope.recaptcha = grecaptcha.render('g-recaptcha', {sitekey: $scope.ctrl.recaptcha});
         };
     };
-    $scope.show = function () {
+    $scope.showForm = function () {
         $scope.state = $scope.STATES.FORM;
-        console.info('state', $scope.state);
     };
     $scope.submit = function () {
+        // TODO validate the form
         var method = $scope.ctrl.method || 'post';
         var recaptcha = $scope.ctrl.recaptcha || null;
         var url = $scope.ctrl.url || '/feedback';
-        $http.post($scope.ctrl.url, $scope.data)
+        $scope.data.referrer = $location.absUrl();
+        $scope.state = $scope.STATES.SENT;
+        $http
+            .post(url, $scope.data)
             .then(function () {
-                // success
-                var response = grecaptcha.getResponse($scope.captcha);
-                if (!response) {
-                    console.info('failed');
+                if ($scope.recaptcha) {
+                    var response = grecaptcha.getResponse($scope.recaptcha);
+                    if (!response) {
+                        console.info('failed');
+                    }
                 }
-            })
-            .catch(function () {
-                // error
-            })
-            .finally(function () {
-                // reset
-                $scope.data = {};
                 $scope.state = $scope.STATES.SUCCESS;
+                setTimeout(function () {
+                    $scope.data = {};
+                    $scope.state = $scope.STATES.BUTTON;
+                    $scope.$apply();
+                }, 3000);
+            })
+            .catch(function (err) {
+                console.error(err);
+                $scope.state = $scope.STATES.ERROR;
+                setTimeout(function () {
+                    $scope.state = $scope.STATES.BUTTON;
+                    $scope.$apply();
+                }, 3000);
             });
     };
 }
 
 angular
     .module('simple-feedback', [])
-    .controller('FeedbackController',['$scope','$http','$element', FeedbackController])
+    .controller('FeedbackController',['$scope', '$http', '$location', FeedbackController])
     .directive('feedbackWidget', [function () {
         return {
             bindToController: true,
             controller: 'FeedbackController',
             controllerAs: 'ctrl',
             link: function(scope, el, attrs, c) {
-                if (attrs.recaptcha !== null) {
+                if (attrs.recaptcha) {
                     scope.setupRecaptcha();
                 }
-                console.info('state', scope.state);
             },
             restrict: 'A',
             scope: {

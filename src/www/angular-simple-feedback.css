@@ -12,23 +12,36 @@
     border: 1px solid rgba(34,36,38,.15);
     border-radius: 0.28571429rem;
     box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    color: #666;
     outline: none;
     padding: 7px 15px 7px 15px;
 }
 
 .simple-feedback button:hover {
-    border: 1px solid rgba(255,0,0,.8);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    color: black;
     outline: none;
 }
 
-.simple-feedback button.toggle-opacity {
-    transition: all linear 0.5s;
-}
-.simple-feedback button.ng-hide {
-    opacity: 0;
+.simple-feedback button.close {
+    align-items: center;
+    border: none;
+    box-shadow: none;
+    color: rgba(34,36,38,.15);
+    display: flex;
+    height: 20px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 20px;
 }
 
-.simple-feedback button.show-form {
+.simple-feedback button.close:hover {
+    background-color: ghostwhite;
+    color: black;
+}
+
+.simple-feedback button.show {
     bottom: 20px;
     min-width: 100px;
     position: fixed;
@@ -39,15 +52,31 @@
     border: 1px solid rgba(0,0,0,0.1);
     color: black;
     font-size: 14px;
+    outline: none;
     padding: 5px;
+}
+
+.simple-feedback input:focus {}
+
+.simple-feedback input:hover {
+    background-color: rgba(0,0,0,0.01);
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .simple-feedback textarea {
     border: 1px solid rgba(0,0,0,0.1);
     color: black;
     font-size: 14px;
+    outline: none;
     padding: 5px;
     resize: none;
+}
+
+.simple-feedback textarea:focus {}
+
+.simple-feedback textarea:hover {
+    background-color: rgba(0,0,0,0.01);
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .simple-feedback .body .row {
@@ -60,18 +89,8 @@
     justify-content: space-between;
 }
 
-.simple-feedback .form {
-    background-color: white;
-    border: 1px solid rgba(34,36,38,.15);
-    border-radius: 0.28571429rem;
-    bottom: 25px;
-    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
-    font-size: small;
-    padding: 10px;
-    position: fixed;
-    right: 25px;
-    width: 324px;
-    z-index: 99;
+.simple-feedback .footer button {
+    box-shadow: none;
 }
 
 .simple-feedback .full-width {
@@ -79,6 +98,7 @@
 }
 
 .simple-feedback .head {
+    align-items: center;
     color: #767676;
     display: flex;
     flex-direction: row;
@@ -86,6 +106,32 @@
     margin-bottom: 15px;
     padding: 8px 3px 3px 3px;
     vertical-align: middle;
+}
+
+.simple-feedback .panel {
+    background-color: white;
+    border: 1px solid rgba(34,36,38,.15);
+    border-radius: 0.28571429rem;
+    bottom: 20px;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    font-size: small;
+    padding: 10px;
+    position: fixed;
+    right: 20px;
+    width: 324px;
+    z-index: 99;
+}
+
+.simple-feedback .panel.error {
+    border: 1px solid #C70039;
+}
+
+.simple-feedback .panel.hidden {
+    display: none;
+}
+
+.simple-feedback .panel.success {
+    border: 1px solid #2ECC71;
 }
 
 @keyframes fadeInAnimation {
@@ -106,23 +152,23 @@
     }
 }
 
-/*@keyframes slideInAnimation {*/
-    /*from {*/
-        /*transform: translateY(100%);*/
-    /*}*/
-    /*to {*/
-        /*transform: translateY(0);*/
-    /*}*/
-/*}*/
+@keyframes slideInAnimation {
+    from {
+        transform: translateY(200%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
 
-/*@keyframes slideOutAnimation {*/
-    /*from {*/
-        /*transform: translateY(0);*/
-    /*}*/
-    /*to {*/
-        /*transform: translateY(100%);*/
-    /*}*/
-/*}*/
+@keyframes slideOutAnimation {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(200%);
+    }
+}
 
 .simple-feedback .fadeIn {
     animation-duration: 1s;
@@ -139,13 +185,13 @@
 }
 
 .simple-feedback .slideIn {
-    animation-duration: 1.5s;
+    animation-duration: 0.75s;
     animation-fill-mode: forwards;
     animation-name: slideInAnimation;
 }
 
 .simple-feedback .slideOut {
-    animation-duration: 1.5s;
+    animation-duration: 0.75s;
     animation-fill-mode: forwards;
     animation-name: slideOutAnimation;
 }
