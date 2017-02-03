@@ -2,23 +2,23 @@
 'use strict';
 
 function FeedbackController ($scope, $http, $element) {
-    $scope.STATES = {READY:0,SENDING:1,ERROR:2,SUCCESS:3};
+    $scope.STATES = {READY:0,FORM:1,BUTTON:2};
     $scope.captcha = null;
     $scope.data = {};
     $scope.state = $scope.STATES.READY;
 
-    $scope.close = function () {};
-    $scope.open = function () {};
+    $scope.hide = function () {
+        $scope.state = $scope.STATES.BUTTON;
+        console.info('state', $scope.state);
+    };
     $scope.setupRecaptcha = function () {
         window.onRecaptchaCallback = function () {
-            $scope.captcha = grecaptcha.render('feedback-recaptcha', {sitekey: $scope.ctrl.recaptcha});
+            $scope.captcha = grecaptcha.render('g-recaptcha', {sitekey: $scope.ctrl.recaptcha});
         };
-
-        // setup recaptcha
-        console.info($http, $element);
     };
     $scope.show = function () {
-        console.info('show');
+        $scope.state = $scope.STATES.FORM;
+        console.info('state', $scope.state);
     };
     $scope.submit = function () {
         var method = $scope.ctrl.method || 'post';
@@ -41,7 +41,6 @@ function FeedbackController ($scope, $http, $element) {
                 $scope.state = $scope.STATES.SUCCESS;
             });
     };
-
 }
 
 angular
@@ -56,6 +55,7 @@ angular
                 if (attrs.recaptcha !== null) {
                     scope.setupRecaptcha();
                 }
+                console.info('state', scope.state);
             },
             restrict: 'A',
             scope: {

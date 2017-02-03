@@ -1,4 +1,151 @@
 .simple-feedback {
+    font-family: Lato, 'Helvetica Neue', Helvetica, sans-serif;
+    z-index: 100;
+}
+
+.simple-feedback * {
+    box-sizing: border-box;
+}
+
+.simple-feedback button {
     background-color: white;
+    border: 1px solid rgba(34,36,38,.15);
+    border-radius: 0.28571429rem;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    outline: none;
+    padding: 7px 15px 7px 15px;
+}
+
+.simple-feedback button:hover {
+    border: 1px solid rgba(255,0,0,.8);
+    outline: none;
+}
+
+.simple-feedback button.toggle-opacity {
+    transition: all linear 0.5s;
+}
+.simple-feedback button.ng-hide {
+    opacity: 0;
+}
+
+.simple-feedback button.show-form {
+    bottom: 20px;
+    min-width: 100px;
+    position: fixed;
+    right: 20px;
+}
+
+.simple-feedback input {
+    border: 1px solid rgba(0,0,0,0.1);
+    color: black;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.simple-feedback textarea {
+    border: 1px solid rgba(0,0,0,0.1);
+    color: black;
+    font-size: 14px;
+    padding: 5px;
+    resize: none;
+}
+
+.simple-feedback .body .row {
+    padding-bottom: 10px;
+}
+
+.simple-feedback .footer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.simple-feedback .form {
+    background-color: white;
+    border: 1px solid rgba(34,36,38,.15);
+    border-radius: 0.28571429rem;
+    bottom: 25px;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
     font-size: small;
+    padding: 10px;
+    position: fixed;
+    right: 25px;
+    width: 324px;
+    z-index: 99;
+}
+
+.simple-feedback .full-width {
+    width: 100%;
+}
+
+.simple-feedback .head {
+    color: #767676;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 8px 3px 3px 3px;
+    vertical-align: middle;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutAnimation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/*@keyframes slideInAnimation {*/
+    /*from {*/
+        /*transform: translateY(100%);*/
+    /*}*/
+    /*to {*/
+        /*transform: translateY(0);*/
+    /*}*/
+/*}*/
+
+/*@keyframes slideOutAnimation {*/
+    /*from {*/
+        /*transform: translateY(0);*/
+    /*}*/
+    /*to {*/
+        /*transform: translateY(100%);*/
+    /*}*/
+/*}*/
+
+.simple-feedback .fadeIn {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-name: fadeInAnimation;
+}
+
+.simple-feedback .fadeOut {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-name: fadeOutAnimation;
+}
+
+.simple-feedback .slideIn {
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-name: slideInAnimation;
+}
+
+.simple-feedback .slideOut {
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-name: slideOutAnimation;
 }

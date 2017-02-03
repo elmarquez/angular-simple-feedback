@@ -3,32 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Angular Simple Feedback Demo</title>
-    <link rel="stylesheet" src="/angular-simple-feedback.css">
+    <link rel="stylesheet" href="/angular-simple-feedback.css">
     <script src="/vendor/angular/angular.min.js"></script>
     <script src="/angular-simple-feedback.js"></script>
 </head>
 <body>
 
 <h1>Simple Feedback Form</h1>
-
 <ul>
     <li>Toggles the display state of the form.</li>
     <li>Sends all the form fields as a JSON object.</li>
     <li>Can optionally include a recaptcha.</li>
 </ul>
 
-<div ng-app="simple-feedback"
+<div class="simple-feedback"
+     ng-app="simple-feedback"
      feedback-widget
      method="post"
-     <% if (recaptcha) { %>recaptcha="<%- recaptcha %>"<% } %>
+     <% if (recaptcha) { %>recaptcha="'<%- recaptcha %>'"<% } %>
      url="'/api/feedback'">
-    <button ng-click="$parent.show()">Send Feedback</button>
-    <div>
-        <input type="email" name="email" ng-model="data.email" placeholder="Email Address" required />
-        <textarea name="description" ng-model="data.description" rows="4" placeholder="Description"></textarea>
-        <button type="submit" ng-click="$parent.submit()">Send</button>
+    <button class="toggle-opacity" ng-click="$parent.show()" ng-hide="state!==STATES.FORM">Send Feedback</button>
+    <div class="form toggle-opacity" ng-show="state===STATES.FORM" ng-cloak>
+        <div class="head">
+            Send Feedback
+            <!--<button class="hide" ng-click="$parent.hide()">Hide</button>-->
+        </div>
+        <div class="body">
+            <div class="row">
+                <input type="email" class="full-width" ng-model="data.email" placeholder="Email Address" required />
+            </div>
+            <div class="row">
+                <textarea name="description" class="full-width" ng-model="data.description" rows="4" placeholder="Description"></textarea>
+            </div>
+            <div id="g-recaptcha" class="row"></div>
+        </div>
+        <div class="footer">
+            <button type="submit" ng-click="$parent.submit()">Send</button>
+        </div>
     </div>
-    <div id="feedback-recaptcha"></div>
 </div>
 
 <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaCallback&render=explicit"></script>
