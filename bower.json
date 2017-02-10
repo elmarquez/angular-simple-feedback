@@ -1,7 +1,7 @@
 {
   "name": "angular-simple-feedback",
   "description": "Easy to configure widget that allow users to provide feedback about a web page.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "gruntfile.js",
   "authors": [
     "Davis Marques <dmarques@freshbits.io>"
