@@ -1,6 +1,6 @@
 {
   "name": "angular-simple-feedback",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Easy to configure widget that allow users to provide feedback about a web page.",
   "author": "Davis Marques <dmarques@freshbits.io>",
   "directories": {
