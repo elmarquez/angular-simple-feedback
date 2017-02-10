@@ -15,12 +15,13 @@
   ],
   "homepage": "https://github.com/elmarquez/angular-simple-feedback",
   "ignore": [
-    "**/.*",
+    ".jshintrc",
+    "gruntfile.js",
+    "conf",
     "node_modules",
-    "bower_components",
-    "vendor",
+    "src",
     "test",
-    "tests"
+    "vendor"
   ],
   "dependencies": {
     "angular": "^1.6.1"
