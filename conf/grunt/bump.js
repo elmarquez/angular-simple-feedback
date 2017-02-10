@@ -2,13 +2,13 @@ module.exports = {
   options: {
     files: ['bower.json', 'package.json'],
     updateConfigs: [],
-    commit: true,
+    commit: false,
     commitMessage: 'Release v%VERSION%',
     commitFiles: ['bower.json', 'package.json'],
-    createTag: true,
+    createTag: false,
     tagName: 'v%VERSION%',
     tagMessage: 'Version %VERSION%',
-    push: true,
+    push: false,
     pushTo: 'origin',
     gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
   }
